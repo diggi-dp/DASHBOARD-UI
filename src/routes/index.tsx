@@ -24,6 +24,9 @@ const AppRouter = () => {
         {
           element: <DashboardPage />,
           index: true,
+        },
+        {
+          element: <DashboardPage />,
           path: '/dashboard',
         },
         {
