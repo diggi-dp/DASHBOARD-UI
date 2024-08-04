@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import IconWrapper from './IconWrapper';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ const Header = () => {
         onClick={toggleMenu}
       >
         {menuItems.map((item, index) => {
-          const IconComponent = item.icon;
+          const IconComponent = item.icon as React.ComponentType<React.HTMLAttributes<HTMLDivElement>>;
           return (
             <Link key={index} to={item.href} className="mt-2 flex items-center rounded-2xl py-2 text-gray-100 hover:text-blue-500">
               <IconComponent className="mr-4 text-xl" />
@@ -51,14 +52,17 @@ const Header = () => {
             <TooltipProvider key={index}>
               <Tooltip>
                 <TooltipTrigger>
-                  <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-slate-500 bg-opacity-50">
-                    {React.createElement(item.icon, { className: 'text-xl cursor-pointer' })}
+                  <IconWrapper
+                    icon={item.icon}
+                    className="relative flex h-10 w-10 items-center justify-center rounded-full bg-slate-500 bg-opacity-50"
+                    iconClasses="text-xl cursor-pointer"
+                  >
                     {item.label === 'Notifications' && notificationCount > 0 && (
                       <span className="absolute right-0 top-0 inline-flex items-center justify-center rounded-full bg-red-600 px-2 py-1 text-xs font-bold leading-none text-red-100">
                         {notificationCount}
                       </span>
                     )}
-                  </div>
+                  </IconWrapper>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" sideOffset={4}>
                   <p>{item.label}</p>

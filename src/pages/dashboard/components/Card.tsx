@@ -1,3 +1,4 @@
+import IconWrapper from '@/components/shared/IconWrapper';
 import React from 'react';
 import { IoMdArrowDropup } from 'react-icons/io';
 
@@ -12,12 +13,13 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ description, value, percentage, isProfit, icon, iconColor, iconWrapperColor }) => {
-  const IconComponent = icon;
   return (
     <div className="flex h-full w-full flex-col justify-between rounded-sm border bg-opacity-50 p-4 dark:bg-slate-800">
-      <div className={`h-12 w-12 ${iconWrapperColor} flex items-center justify-center rounded-lg`}>
-        <IconComponent className={`neon text-2xl ${iconColor}`} />
-      </div>
+      <IconWrapper
+        icon={icon}
+        className={`h-12 w-12 ${iconWrapperColor} flex items-center justify-center rounded-lg`}
+        iconClasses={`text-2xl ${iconColor}`}
+      />
       <p className="py-2 text-sm">{description}</p>
       <div className="flex items-center justify-between">
         <p className="text-2xl font-semibold">{value}</p>

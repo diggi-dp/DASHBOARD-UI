@@ -6,10 +6,11 @@ interface CardProps {
   description: string;
   value: number | string;
   percentage: number;
+  goalPercentage: number;
   isProfit: boolean;
 }
 
-const NetProfitCard: React.FC<CardProps> = ({ description, value, percentage, isProfit }) => {
+const NetProfitCard: React.FC<CardProps> = ({ description, value, percentage, isProfit, goalPercentage }) => {
   return (
     <div className="grid h-full w-full grid-cols-2 rounded-sm border bg-opacity-50 p-4 dark:bg-slate-800 lg:grid-cols-1 xl:grid-cols-2">
       <div className="grid-col-1 grid">
@@ -25,7 +26,7 @@ const NetProfitCard: React.FC<CardProps> = ({ description, value, percentage, is
         </div>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <ProgressRing percentage={75} height={120} width={120} />
+        <ProgressRing percentage={goalPercentage} height={120} width={120} />
         <p className="text-[0.5rem]">*The value here has been rounded off</p>
       </div>
     </div>

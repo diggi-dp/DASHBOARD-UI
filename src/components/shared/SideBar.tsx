@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const SideBar = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {
   const location = useLocation();
-
+  console.log(location.pathname);
   return (
     <div
       className={`${open ? 'w-64' : 'w-18'} hidden h-screen flex-col items-start gap-10 bg-slate-100 p-4 pl-4 duration-300 dark:bg-slate-800 md:flex`}
@@ -20,13 +20,15 @@ const SideBar = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) =>
       </div>
       <div className={`flex flex-1 flex-col gap-2 ${open && 'px-4'}`}>
         {menuItems.map((item, index) => {
-          const IconComponent = item.icon;
+          const IconComponent = item.icon as React.ComponentType<React.HTMLAttributes<HTMLDivElement>>;
           return (
             <Link
               key={index}
               to={item.href}
-              className={`mt-2 flex items-center py-2 text-gray-100 ${
-                location.pathname === item.href || (location.pathname === '/' && item.href === '/dashboard') ? 'text-blue-500' : 'hover:text-blue-500'
+              className={`mt-2 flex items-center py-2 text-gray-900 dark:text-gray-100 ${
+                location.pathname === item.href || (location.pathname === '/' && item.href === '/dashboard')
+                  ? '!text-blue-500'
+                  : 'hover:text-blue-500'
               } rounded-2xl ${item.className || ''}`}
             >
               <TooltipProvider>
