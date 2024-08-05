@@ -55,4 +55,4 @@ If you have any questions or need further assistance, feel free to reach out:
 
 * Email: [digpalsinghmandloi1@gmail.com](mailto:digpalsinghmandloi1@example.com)
 * GitHub: [diggi-dp](https://github.com/diggi-dp)
-* LinkedIn: [Digpal singh mandloi]([https://www.linkedin.com/in/your-name/](https://www.linkedin.com/in/digpal-singh-mandloi-91b865268/))
+* LinkedIn: [Digpal singh mandloi](https://www.linkedin.com/in/digpal-singh-mandloi-91b865268/)
