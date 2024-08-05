@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoCloseOutline, IoMenuOutline } from 'react-icons/io5';
 import { Input } from '../ui/Input';
 import { menuItems, actionItems } from '@/lib/constants';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
@@ -12,6 +12,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const notificationCount = 5;
 
   const toggleMenu = () => {
@@ -30,13 +31,21 @@ const Header = () => {
       </button>
 
       <div
-        className={`${menuOpen ? 'flex' : 'hidden'} text-bold absolute left-0 top-16 w-full flex-1 flex-col gap-3 bg-slate-800 px-4 md:hidden`}
+        className={`${menuOpen ? 'flex' : 'hidden'} text-bold absolute left-0 top-16 z-[9999] w-full flex-1 flex-col gap-3 bg-slate-800 px-4 md:hidden`}
         onClick={toggleMenu}
       >
         {menuItems.map((item, index) => {
           const IconComponent = item.icon as React.ComponentType<React.HTMLAttributes<HTMLDivElement>>;
           return (
-            <Link key={index} to={item.href} className="mt-2 flex items-center rounded-2xl py-2 text-gray-100 hover:text-blue-500">
+            <Link
+              key={index}
+              to={item.href}
+              className={`mt-2 flex items-center rounded-2xl py-2 text-gray-900 dark:text-gray-100 ${
+                location.pathname === item.href || (location.pathname === '/' && item.href === '/dashboard')
+                  ? '!text-blue-500'
+                  : 'hover:text-blue-500'
+              }`}
+            >
               <IconComponent className="mr-4 text-xl" />
               <span>{item.label}</span>
             </Link>
